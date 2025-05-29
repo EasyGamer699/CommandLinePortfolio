@@ -29,21 +29,24 @@ body {
 }
 #prompt {
     margin-right: 5px;
-    color: #6a9955; /* Green color for the prompt */
+    color: #00ffff; /* Green color for the prompt */
+    font-family: "Consolas", "Lucida Console";
+    font-weight: bold;
 }
 /* Use the class for the dynamic input fields */
 .command-input {
     flex-grow: 1;
     background-color: transparent;
-    color: #d4d4d4;
+    color: #ffffff;
     border: none;
     outline: none;
     font-family: inherit;
     font-size: inherit;
     width: calc(100% - 15px); /* Adjust width considering prompt margin */
+    font-family: "Consolas", "Lucida Console";
 }
 /* Style for disabled input fields (after command is entered) */
 .command-input:disabled {
     color: #d4d4d4; /* Keep text color consistent */
     opacity: 1; /* Ensure it's fully visible */
-} 
+}

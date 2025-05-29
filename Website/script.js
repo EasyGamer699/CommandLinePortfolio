@@ -80,17 +80,19 @@ document.addEventListener('DOMContentLoaded', () => {
             printToShell('Hello World!');
         } else if (mainCommand === 'clear') {
             outputElement.innerHTML = ''; // Clears all content
-            printToShell('Terminal [Version 1.0.0]');
-            printToShell('(c) Aaron Corporation. All rights reserved.');
             printToShell(''); // Fügt auch hier eine Leerzeile nach dem Leeren hinzu
         } else if (mainCommand === 'help') {
+            printToShell('');
             printToShell('Available commands:');
-            printToShell('- hello: Prints "Hello World!"');
-            printToShell('- clear: Clears the console output.');
-            printToShell('- help: Displays this help message.');
+            printToShell('');
+            printToShell('hello     Prints "Hello World!"');
+            printToShell('clear     Clears the console output.');
+            printToShell('help      Displays this help message.');
+            printToShell('');
         } else {
             printToShell('Command not recognized: ' + command);
             printToShell("Type 'help' to see available commands.");
+            printToShell('');
         }
     }
 
