@@ -14,10 +14,8 @@ This is an Windows CMD inspired Portfolio Website coded by me. I will make an Te
 
 ## Features
 
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
+- Added Soon!
+
 
 
 ## Authors
