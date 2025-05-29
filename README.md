@@ -14,7 +14,7 @@ This is an Windows CMD inspired Portfolio Website coded by me. I will make an Te
 
 ## Features
 
-- Added Soon!
+- Placeholder , Adding Soon!
 
 
 
