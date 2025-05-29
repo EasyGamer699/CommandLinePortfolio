@@ -104,4 +104,4 @@ document.addEventListener('DOMContentLoaded', () => {
             lastInput.focus();
         }
     });
-});
+}); 

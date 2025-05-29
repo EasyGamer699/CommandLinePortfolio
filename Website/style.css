@@ -46,4 +46,4 @@ body {
 .command-input:disabled {
     color: #d4d4d4; /* Keep text color consistent */
     opacity: 1; /* Ensure it's fully visible */
-}
+} 
