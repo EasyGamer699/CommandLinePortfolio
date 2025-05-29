@@ -8,7 +8,7 @@ This is an Windows CMD inspired Portfolio Website coded by me. I will make an Te
 
 ## Demo
 
-[Click me for Demo](https://easygamer699.github.io/PortfolioWebsite/Website/)
+[Click me for Demo](https://easygamer699.github.io/CommandLinePortfolio/Website/)
 
 
 
@@ -35,5 +35,5 @@ Conact        put in ur email to get in Contact. (coming soon!)
 
 ## Screenshots
 
-![App Screenshot](https://raw.githubusercontent.com/EasyGamer699/PortfolioWebsite/refs/heads/main/Pictures/screen.png)
+![App Screenshot](https://raw.githubusercontent.com/EasyGamer699/CommandLinePortfolio/refs/heads/main/Pictures/screen.png)
 
