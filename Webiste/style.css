@@ -1,0 +1,49 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+}
+#shell-output {
+    flex-grow: 1;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    margin-bottom: 10px;
+    /* Removed border and background from here, as they are now per-line */
+    padding: 10px; /* Still good to have padding */
+}
+
+/* Style for each command output line */
+#shell-output > div {
+    margin-bottom: 2px; /* Small spacing between lines */
+}
+
+#input-line {
+    display: flex;
+    align-items: baseline; /* Align prompt and input text */
+}
+#prompt {
+    margin-right: 5px;
+    color: #6a9955; /* Green color for the prompt */
+}
+/* Use the class for the dynamic input fields */
+.command-input {
+    flex-grow: 1;
+    background-color: transparent;
+    color: #d4d4d4;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+    width: calc(100% - 15px); /* Adjust width considering prompt margin */
+}
+/* Style for disabled input fields (after command is entered) */
+.command-input:disabled {
+    color: #d4d4d4; /* Keep text color consistent */
+    opacity: 1; /* Ensure it's fully visible */
+}
