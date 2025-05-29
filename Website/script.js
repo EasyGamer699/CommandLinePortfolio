@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             newLine.appendChild(commandSpan);
         } else {
             // Use &nbsp; for empty lines to ensure they render with height
-            newLine.innerHTML = message === '' ? '&nbsp;' : message; // <-- Geänderte Zeile hier
+            newLine.innerHTML = message === '' ? '&nbsp;' : message;
         }
         outputElement.appendChild(newLine);
         outputElement.scrollTop = outputElement.scrollHeight; // Scroll to end
@@ -29,58 +29,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const promptSpan = document.createElement('span');
         promptSpan.id = 'prompt';
-        promptSpan.textContent = 'C:\\Users\\Aaron>'; // <--- This line is corrected
+        promptSpan.textContent = 'C:\\Users\\Aaron>';
         inputLine.appendChild(promptSpan);
 
         const inputElement = document.createElement('input');
         inputElement.type = 'text';
-        inputElement.className = 'command-input'; // Use a class as there will be multiple
+        inputElement.className = 'command-input';
         inputElement.autofocus = true;
         inputLine.appendChild(inputElement);
 
         outputElement.appendChild(inputLine);
-        inputElement.focus(); // Set focus to the new input field
+        inputElement.focus();
 
         inputElement.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 const command = inputElement.value.trim();
-                inputElement.disabled = true; // Disable the input after entering command
-                inputElement.removeAttribute('autofocus'); // Remove autofocus from processed input
+                inputElement.disabled = true;
+                inputElement.removeAttribute('autofocus');
 
-                // Display the entered command as static text
-                const commandDisplayLine = document.createElement('div');
-                commandDisplayLine.innerHTML = `<span id="prompt">></span> ${command}`;
-                outputElement.insertBefore(commandDisplayLine, inputLine); // Insert before the current input line
+                // MODIFICATION START: Display the entered command directly within the input line
+                const commandTextSpan = document.createElement('span');
+                commandTextSpan.textContent = command;
+                commandTextSpan.className = 'command-display-text'; // Add a class for styling if needed
+                inputElement.parentNode.replaceChild(commandTextSpan, inputElement); // Replace input with span
 
                 if (command !== '') {
                     executeCommand(command);
                 }
-                addNewInputLine(); // Add a new input line for the next command
+                addNewInputLine();
             }
         });
 
-        outputElement.scrollTop = outputElement.scrollHeight; // Scroll to the bottom
+        outputElement.scrollTop = outputElement.scrollHeight;
     }
 
 
     // Initialer Begrüßungsbildschirm
     printToShell('Terminal [Version 1.0.0]');
     printToShell('(c) Aaron Corporation. All rights reserved.');
-    printToShell(''); // Diese Zeile funktioniert jetzt als Leerzeile
+    printToShell('');
     printToShell("Type 'help' for commands.");
-    printToShell(''); // Diese Zeile funktioniert jetzt als Leerzeile
+    printToShell('');
 
 
     // Funktion zur Verarbeitung der eingegebenen Befehle
     function executeCommand(command) {
         const parts = command.toLowerCase().split(' ');
-        const mainCommand = parts[0];  
+        const mainCommand = parts[0];
 
         if (mainCommand === 'hello') {
             printToShell('Hello World!');
         } else if (mainCommand === 'clear') {
-            outputElement.innerHTML = ''; // Clears all content
-            printToShell(''); // Fügt auch hier eine Leerzeile nach dem Leeren hinzu
+            outputElement.innerHTML = '';
+            printToShell('');
         } else if (mainCommand === 'help') {
             printToShell('');
             printToShell('Available commands:');
@@ -88,6 +89,15 @@ document.addEventListener('DOMContentLoaded', () => {
             printToShell('hello     Prints "Hello World!"');
             printToShell('clear     Clears the console output.');
             printToShell('help      Displays this help message.');
+            printToShell('dir       Displays the "Menu".');
+            printToShell('');
+        } else if (mainCommand === 'dir') {
+            printToShell('');
+            printToShell('      Directory of C:\\Users\\Aaron\\Website');
+            printToShell('C:');
+            printToShell('├──AboutMe.html');
+            printToShell('├──Projects.html');
+            printToShell('└──Skills.html');
             printToShell('');
         } else {
             printToShell('Command not recognized: ' + command);
@@ -106,4 +116,4 @@ document.addEventListener('DOMContentLoaded', () => {
             lastInput.focus();
         }
     });
-}); 
+});
