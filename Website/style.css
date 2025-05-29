@@ -9,6 +9,7 @@ body {
     height: 100vh;
     box-sizing: border-box;
 }
+
 #shell-output {
     flex-grow: 1;
     overflow-y: auto;
@@ -29,7 +30,7 @@ body {
 }
 #prompt {
     margin-right: 5px;
-    color: #00ffff; /* Green color for the prompt */
+    color: rgb(0, 94, 255); /* Green color for the prompt */
     font-family: "Consolas", "Lucida Console";
     font-weight: bold;
 }

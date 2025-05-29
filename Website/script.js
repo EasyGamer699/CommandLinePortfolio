@@ -108,14 +108,17 @@ document.addEventListener('DOMContentLoaded', () => {
             printToShell('');
 
         } else if (mainCommand === 'aboutme.html') {
-            window.open('aboutme.html', '_blank');
+            open('aboutme.html', '_blank');
+            printToShell('Opend AboutMe');
         
         } else if (mainCommand === 'projects.html') {
             window.open('aboutme.html', '_blank');
+            printToShell('Opend projects');
         
         } else if (mainCommand === 'skills.html') {
-            window.open('aboutme.html', '_blank');
-            
+            window.open('aboutme.html');
+            printToShell('Opend Skills');
+
         } else {
             printToShell('Command not recognized: ' + command);
             printToShell("Type 'help' to see available commands.");
