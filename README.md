@@ -14,7 +14,18 @@ This is an Windows CMD inspired Portfolio Website coded by me. I will make an Te
 
 ## Features
 
-- Placeholder , Adding Soon!
+Available commands:
+ 
+- hello         Prints "Hello World!"
+- clear         Clears the console output.
+- dir           Displays the "Menu".
+- help          Displays help message.
+ 
+- aboutme.html  opens AboutMe Site (coming soon!)
+- projects.html opens Projects Site (coming soon!)
+- skills.html   opens Skills Site (coming soon!)
+ 
+Conact        put in ur email to get in Contact. (coming soon!)
 
 
 
