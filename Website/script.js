@@ -86,11 +86,18 @@ document.addEventListener('DOMContentLoaded', () => {
             printToShell('');
             printToShell('Available commands:');
             printToShell('');
-            printToShell('hello     Prints "Hello World!"');
-            printToShell('clear     Clears the console output.');
-            printToShell('help      Displays this help message.');
-            printToShell('dir       Displays the "Menu".');
+            printToShell('hello         Prints "Hello World!"');
+            printToShell('clear         Clears the console output.');
+            printToShell('dir           Displays the "Menu".');
+            printToShell('help          Displays this help message.');
             printToShell('');
+            printToShell('aboutme.html  opens AboutMe Site');
+            printToShell('projects.html opens Projects Site');
+            printToShell('skills.html   opens Skills Site');
+            printToShell('');
+            printToShell('conact        put in ur email to get in Contact.');
+            printToShell('');
+
         } else if (mainCommand === 'dir') {
             printToShell('');
             printToShell('      Directory of C:\\Users\\Aaron\\Website');
@@ -99,6 +106,16 @@ document.addEventListener('DOMContentLoaded', () => {
             printToShell('├──Projects.html');
             printToShell('└──Skills.html');
             printToShell('');
+
+        } else if (mainCommand === 'aboutme.html') {
+            window.open('aboutme.html', '_blank');
+        
+        } else if (mainCommand === 'projects.html') {
+            window.open('aboutme.html', '_blank');
+        
+        } else if (mainCommand === 'skills.html') {
+            window.open('aboutme.html', '_blank');
+            
         } else {
             printToShell('Command not recognized: ' + command);
             printToShell("Type 'help' to see available commands.");
