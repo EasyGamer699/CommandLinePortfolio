@@ -1,25 +1,65 @@
 document.addEventListener('DOMContentLoaded', () => {
     const outputElement = document.getElementById('shell-output');
+    const TYPING_SPEED = 10; // Milliseconds per step
 
-    // Funktion zum Drucken von Nachrichten in die Shell-Ausgabe
-    function printToShell(message, isCommand = false) {
+    // Funktion zum Drucken von Nachrichten in die Shell-Ausgabe mit Tipp-Effekt
+    function printToShell(message, isCommand = false, callback = () => {}) {
         const newLine = document.createElement('div');
+        outputElement.appendChild(newLine);
+
+        let targetElement;
+        let cursorElement = document.createElement('span'); // Erstelle das Cursor-Element
+        cursorElement.className = 'typing-cursor'; // Weise die Cursor-Klasse zu
+
         if (isCommand) {
-            // For commands, we'll recreate the prompt and input structure
             const promptSpan = document.createElement('span');
             promptSpan.id = 'prompt';
-            promptSpan.textContent = '>'; // Or your desired prompt
+            promptSpan.textContent = '>';
             newLine.appendChild(promptSpan);
-
-            const commandSpan = document.createElement('span');
-            commandSpan.textContent = ' ' + message;
-            newLine.appendChild(commandSpan);
+            
+            targetElement = document.createElement('span');
+            newLine.appendChild(targetElement);
+            // Cursor wird initial an targetElement gehängt
+            targetElement.appendChild(cursorElement); 
+            message = ' ' + message;
         } else {
-            // Use &nbsp; for empty lines to ensure they render with height
-            newLine.innerHTML = message === '' ? '&nbsp;' : message;
+            targetElement = newLine;
+            if (message === '') {
+                targetElement.innerHTML = '&nbsp;';
+                outputElement.scrollTop = outputElement.scrollHeight;
+                callback();
+                return;
+            }
+            // Cursor wird initial an targetElement gehängt
+            targetElement.appendChild(cursorElement);
         }
-        outputElement.appendChild(newLine);
-        outputElement.scrollTop = outputElement.scrollHeight; // Scroll to end
+
+        let i = 0;
+        function typeWriter() {
+            if (i <= message.length) {
+                // Den Cursor vor dem Aktualisieren des Textes entfernen,
+                // damit er immer am Ende des aktuellen Textes hinzugefügt werden kann.
+                if (cursorElement.parentNode) {
+                    cursorElement.parentNode.removeChild(cursorElement);
+                }
+
+                targetElement.textContent = message.substring(0, i);
+                
+                // Füge den Cursor wieder am Ende des aktualisierten Textes hinzu
+                targetElement.appendChild(cursorElement);
+
+                i++;
+                outputElement.scrollTop = outputElement.scrollHeight;
+                setTimeout(typeWriter, TYPING_SPEED);
+            } else {
+                // Animation beendet: Cursor entfernen und Callback aufrufen
+                if (cursorElement.parentNode) {
+                    cursorElement.parentNode.removeChild(cursorElement);
+                }
+                callback(); 
+            }
+        }
+        typeWriter();
     }
 
     // Funktion zum Hinzufügen einer neuen Eingabezeile (bleibt unverändert)
@@ -47,16 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 inputElement.disabled = true;
                 inputElement.removeAttribute('autofocus');
 
-                // MODIFICATION START: Display the entered command directly within the input line
                 const commandTextSpan = document.createElement('span');
                 commandTextSpan.textContent = command;
-                commandTextSpan.className = 'command-display-text'; // Add a class for styling if needed
-                inputElement.parentNode.replaceChild(commandTextSpan, inputElement); // Replace input with span
+                commandTextSpan.className = 'command-display-text';
+                inputElement.parentNode.replaceChild(commandTextSpan, inputElement);
 
-                if (command !== '') {
-                    executeCommand(command);
-                }
-                addNewInputLine();
+                executeCommand(command, () => {
+                    addNewInputLine();
+                });
             }
         });
 
@@ -64,70 +102,84 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // Initialer Begrüßungsbildschirm
-    printToShell('Terminal [Version 1.0.0]');
-    printToShell('(c) Aaron Corporation. All rights reserved.');
-    printToShell('');
-    printToShell("Type 'help' for commands.");
-    printToShell('');
+    // Initialer Begrüßungsbildschirm - Jetzt mit sequentiellen Aufrufen
+    printToShell('Terminal [Version 1.0.0]', false, () => {
+        printToShell('(c) Aaron Corporation. All rights reserved.', false, () => {
+            printToShell('', false, () => { // Leerzeile
+                printToShell("Type 'help' for commands.", false, () => {
+                    printToShell('', false, () => { // Eine weitere Leerzeile
+                        addNewInputLine(); // Erste Eingabezeile hinzufügen, nachdem alles getippt wurde
+                    });
+                });
+            });
+        });
+    });
 
 
     // Funktion zur Verarbeitung der eingegebenen Befehle
-    function executeCommand(command) {
+    function executeCommand(command, onCompleteCallback = () => {}) {
         const parts = command.toLowerCase().split(' ');
         const mainCommand = parts[0];
 
+        const respond = (messages, index = 0, callback = () => {}) => {
+            if (index < messages.length) {
+                printToShell(messages[index], false, () => {
+                    respond(messages, index + 1, callback);
+                });
+            } else {
+                callback();
+            }
+        };
+
         if (mainCommand === 'hello') {
-            printToShell('Hello World!');
+            respond(['Hello World!'], 0, onCompleteCallback);
         } else if (mainCommand === 'clear') {
             outputElement.innerHTML = '';
-            printToShell('');
+            onCompleteCallback(); 
         } else if (mainCommand === 'help') {
-            printToShell('');
-            printToShell('Available commands:');
-            printToShell('');
-            printToShell('hello         Prints "Hello World!"');
-            printToShell('clear         Clears the console output.');
-            printToShell('dir           Displays the "Menu".');
-            printToShell('help          Displays this help message.');
-            printToShell('');
-            printToShell('aboutme.html  opens AboutMe Site');
-            printToShell('projects.html opens Projects Site');
-            printToShell('skills.html   opens Skills Site');
-            printToShell('');
-            printToShell('conact        put in ur email to get in Contact.');
-            printToShell('');
-
+            respond([
+                '',
+                'Available commands:',
+                '',
+                'hello         Prints "Hello World!"',
+                'clear         Clears the console output.',
+                'dir           Displays the "Menu".',
+                'help          Displays this help message.',
+                '',
+                'aboutme.html  opens AboutMe Site',
+                'projects.html opens Projects Site',
+                'skills.html   opens Skills Site',
+                '',
+                'Conact        put in ur email to get in Contact.',
+                ''
+            ], 0, onCompleteCallback);
         } else if (mainCommand === 'dir') {
-            printToShell('');
-            printToShell('      Directory of C:\\Users\\Aaron\\Website');
-            printToShell('C:');
-            printToShell('├──AboutMe.html');
-            printToShell('├──Projects.html');
-            printToShell('└──Skills.html');
-            printToShell('');
-
+            respond([
+                '',
+                '      Directory of C:\\Users\\Aaron\\Website',
+                'C:',
+                '├──AboutMe.html',
+                '├──Projects.html',
+                '└──Skills.html',
+                ''
+            ], 0, onCompleteCallback);
         } else if (mainCommand === 'aboutme.html') {
             open('aboutme.html', '_blank');
-            printToShell('Opend AboutMe');
-        
+            respond(['Opend AboutMe'], 0, onCompleteCallback);
         } else if (mainCommand === 'projects.html') {
             window.open('aboutme.html', '_blank');
-            printToShell('Opend projects');
-        
+            respond(['Opend projects'], 0, onCompleteCallback);
         } else if (mainCommand === 'skills.html') {
             window.open('aboutme.html');
-            printToShell('Opend Skills');
-
+            respond(['Opend Skills'], 0, onCompleteCallback);
         } else {
-            printToShell('Command not recognized: ' + command);
-            printToShell("Type 'help' to see available commands.");
-            printToShell('');
+            respond([
+                'Command not recognized: ' + command,
+                "Type 'help' to see available commands.",
+                ''
+            ], 0, onCompleteCallback);
         }
     }
-
-    // Beim Laden der Seite die erste Eingabezeile hinzufügen
-    addNewInputLine();
 
     // Fokus auf das letzte Eingabefeld setzen, wenn auf den Ausgabebereich geklickt wird
     outputElement.addEventListener('click', () => {
@@ -136,4 +188,4 @@ document.addEventListener('DOMContentLoaded', () => {
             lastInput.focus();
         }
     });
-});
+});a
