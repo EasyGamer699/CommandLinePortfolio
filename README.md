@@ -24,5 +24,5 @@ This is an Windows CMD inspired Portfolio Website coded by me. I will make an Te
 
 ## Screenshots
 
-[App Screenshot](https://raw.githubusercontent.com/EasyGamer699/PortfolioWebsite/refs/heads/main/Pictures/screen.png)
+![App Screenshot](https://raw.githubusercontent.com/EasyGamer699/PortfolioWebsite/refs/heads/main/Pictures/screen.png)
 
