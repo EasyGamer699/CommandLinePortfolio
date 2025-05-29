@@ -17,6 +17,8 @@ body {
     margin-bottom: 10px;
     /* Removed border and background from here, as they are now per-line */
     padding: 10px; /* Still good to have padding */
+    font-family: "Consolas", "Lucida Console";
+    color: white;
 }
 
 /* Style for each command output line */
