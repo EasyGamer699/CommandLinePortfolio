@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const promptSpan = document.createElement('span');
         promptSpan.id = 'prompt';
-        promptSpan.textContent = 'C:\\Users\\Aaron>';
+        promptSpan.textContent = 'C:\\Users\\Admin>';
         inputLine.appendChild(promptSpan);
 
         const inputElement = document.createElement('input');
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ''
             ], 0, onCompleteCallback);
         } else if (mainCommand === 'aboutme.html') {
-            open('aboutme.html', '_blank');
+            open('site2/aboutme.html', '_blank');
             respond(['Opend AboutMe'], 0, onCompleteCallback);
         } else if (mainCommand === 'projects.html') {
             window.open('aboutme.html', '_blank');

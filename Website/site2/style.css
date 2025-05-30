@@ -1,0 +1,79 @@
+@font-face {
+  font-family: 'Lumen';
+  src: url('Lumen-Full.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  background-color: #D9D9D9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.stripe-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.stripe {
+  width: 2000px;
+  height: 30px;
+}
+
+.green  { background-color: #61bb46; }
+.yellow { background-color: #fdb827; }
+.orange { background-color: #f5821f; }
+.red    { background-color: #e03a3e; }
+.purple { background-color: #963d97; }
+
+.content-wrapper {
+  position: relative;
+  z-index: 2; /* Ensure text is above stripes */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Adjust this margin to move the text block up or down relative to the stripes */
+  margin-top: -30px; /* Example adjustment: move text slightly up to center on stripes */
+}
+
+.hello {
+    font-size: 150px;
+    font-family: 'Lumen', sans-serif;
+    color: black;
+    /* Remove width: 100% and text-align: center if content-wrapper handles centering */
+    line-height: 1; /* Adjust line height to reduce space above/below "hello" */
+    margin-bottom: 0px; /* Pull "name" text closer to "hello" */
+    line-height: 150px;
+    margin-top: 90px;
+}
+
+.hello h1 {
+  margin: 0; /* Remove default margin from h1 */
+}
+
+.name {
+    font-size: 30px;
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400; /* Set a specific font-weight, e.g., 400 for regular */
+    font-style: normal;
+    color: black;
+    /* Remove width: 100% and text-align: center if content-wrapper handles centering */
+    line-height: 0; /* Adjust line height to reduce space above/below "its me aaron" */
+}
+
+.name h1 {
+  margin: 0; /* Remove default margin from h1 */
+}
