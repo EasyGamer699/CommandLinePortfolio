@@ -21,7 +21,7 @@ Available commands:
 - dir           Displays the "Menu".
 - help          Displays help message.
  
-- aboutme.html  opens AboutMe Site (coming soon!)
+- aboutme.html  opens AboutMe Site (not Finished!)
 - projects.html opens Projects Site (coming soon!)
 - skills.html   opens Skills Site (coming soon!)
  
