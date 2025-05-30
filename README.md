@@ -1,7 +1,7 @@
 # Portfolio Website
 Command Line Portfolio Website
 
-This is an Windows CMD inspired Portfolio Website coded by me. I will make an Template soon, so you can get urself one too. 
+This is an Windows CMD inspired Portfolio Website coded by me.
 
 
 
